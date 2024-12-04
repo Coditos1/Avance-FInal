@@ -1,0 +1,961 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    height: 100%;
+    margin: 0;
+}
+
+nav {
+    width: 230px;
+    height: 100vh;
+    background: #2c2c2c;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+}
+
+nav h1 {
+    color: white;
+    font-size: 1.2rem;
+    padding: 0 15px 20px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.3s ease, transform 0.3% ease;
+}
+
+nav h1:hover {
+    color: orange;
+    transform: scale(1.03);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+nav ul li {
+    margin: 15px 0px;
+}
+
+nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+nav ul li a i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+    color: #ff7d33;;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+    color: #ff7d33;;
+}
+
+nav ul li a.active {
+    background-color: #ff7d33;;
+    color: white;
+}
+
+nav ul li a.active i {
+    color: white;
+}
+
+nav ul li.separator {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 15px 0;
+}
+
+main {
+    margin-left: 240px;
+    padding: 80px 20px 20px;
+    width: calc(100% - 240px);
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background-color: #ff7d33;;
+    transition: height 0.3s ease;
+}
+
+nav ul li a:hover::before {
+    height: 100%;
+}
+
+section {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+section:hover {
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.collage-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, minmax(1, 1fr));
+    gap: 1rem;
+    padding: 20px;
+    margin-top: 5px;
+    height: calc(100vh - 80px);
+}
+
+.collage-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+}
+
+.collage-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.collage-item h2 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.collage-item h2 i {
+    color: #3498db;
+}
+
+#orden-form {
+    display: flex;
+    flex-direction: column;
+    display: flex; /* Utiliza flexbox para el formulario */
+    flex-direction: column; /* Coloca los elementos del formulario en columna */
+    gap: 15px; /* Espacio entre los elementos del formulario */
+}
+
+#orden-form textarea {
+    min-height: 150px; /* Altura mínima del área de texto */
+    max-height: 300px; /* Altura máxima del área de texto */
+    width: 100%; /* Ancho del área de texto al 100% */
+    padding: 12px; /* Espaciado dentro del área de texto */
+    border: 2px solid #e0e0e0; /* Borde del área de texto */
+    border-radius: 8px; /* Bordes redondeados para el área de texto */
+    resize: vertical; /* Permite redimensionar verticalmente el área de texto */
+    margin-bottom: 15px; /* Margen inferior del área de texto */
+}
+
+/* Estilos para la cuadrícula de repuestos */
+.repuestos-grid {
+    display: grid; /* Utiliza grid para el diseño */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Define columnas adaptativas */
+    gap: 15px; /* Espacio entre los elementos de la cuadrícula */
+    margin-bottom: 15px; /* Margen inferior de la cuadrícula */
+    padding-right: 10px; /* Espaciado a la derecha de la cuadrícula */
+}
+
+/* Estilos para las tarjetas de repuestos */
+.repuesto-card {
+    background: #f8f9fa; /* Color de fondo de las tarjetas de repuestos */
+    padding: 15px; /* Espaciado dentro de las tarjetas de repuestos */
+    border-radius: 8px; /* Bordes redondeados para las tarjetas de repuestos */
+    position: relative; /* Posiciona las tarjetas de repuestos de forma relativa */
+    margin-top: 20px; /* Margen superior de las tarjetas de repuestos */
+    min-height: 180px; /* Altura mínima de las tarjetas de repuestos */
+}
+
+/* Estilos para el contenedor de estadísticas */
+.stats-container {
+    display: grid; /* Utiliza grid para el diseño */
+    grid-template-columns: repeat(2, 1fr); /* Define 2 columnas */
+    gap: 10px; /* Espacio entre los elementos de estadísticas */
+    margin-bottom: 15px; /* Margen inferior del contenedor de estadísticas */
+}
+
+/* Estilos para las tarjetas de estadísticas */
+.stat-card {
+    padding: 10px; /* Espaciado dentro de las tarjetas de estadísticas */
+}
+
+/* Estilos para los números de estadísticas */
+.stat-number {
+    font-size: 2em; /* Tamaño de fuente para los números de estadísticas */
+    color: #ff7d33; /* Color de los números de estadísticas */
+    font-weight: bold; /* Peso de fuente para los números de estadísticas */
+}
+
+/* Estilos para la línea de tiempo */
+.timeline {
+    max-height: 200px; /* Altura máxima de la línea de tiempo */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    margin: 10px 0; /* Margen vertical de la línea de tiempo */
+    padding-right: 10px; /* Espaciado a la derecha de la línea de tiempo */
+}
+
+/* Estilos para los elementos de la línea de tiempo */
+.timeline-item {
+    padding: 8px; /* Espaciado dentro de los elementos de la línea de tiempo */
+    border-left: 3px solid #3498db; /* Borde izquierdo de los elementos de la línea de tiempo */
+    margin-bottom: 8px; /* Margen inferior de los elementos de la línea de tiempo */
+    position: relative; /* Posiciona los elementos de la línea de tiempo de forma relativa */
+}
+
+/* Estilos para los elementos de la línea de tiempo según su estado */
+.timeline-item.urgente {
+    border-left-color: #dc3545; /* Color del borde izquierdo para elementos urgentes */
+}
+
+.timeline-item.preventivo {
+    border-left-color: #28a745; /* Color del borde izquierdo para elementos preventivos */
+}
+
+.timeline-item.correctivo {
+    border-left-color: #ffc107; /* Color del borde izquierdo para elementos correctivos */
+}
+
+/* Estilos para el estado de los elementos */
+.status {
+    font-size: 0.8em; /* Tamaño de fuente para el estado */
+    padding: 2px 8px; /* Espaciado dentro del estado */
+    border-radius: 12px; /* Bordes redondeados para el estado */
+    float: right; /* Flota el estado a la derecha */
+}
+
+/* Estilos para los estados completados */
+.status.completado {
+    background-color: #dc3545; /* Color de fondo para estado completado */
+    color: white; /* Color del texto para estado completado */
+}
+
+/* Estilos para los estados en proceso */
+.status.en-proceso {
+    background-color: #28a745; /* Color de fondo para estado en proceso */
+    color: white; /* Color del texto para estado en proceso */
+}
+
+/* Estilos para los estados pendientes */
+.status.pendiente {
+    background-color: #ffc107; /* Color de fondo para estado pendiente */
+    color: black; /* Color del texto para estado pendiente */
+}
+
+/* Estilos para el formulario de orden */
+#orden-form {
+    max-width: 1000px; /* Ancho máximo del formulario */
+    margin: 20px auto; /* Margen automático para centrar el formulario */
+    padding: 25px; /* Espaciado dentro del formulario */
+    background-color: #ffffff; /* Color de fondo del formulario */
+    border-radius: 10px; /* Bordes redondeados para el formulario */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del formulario */
+}
+
+/* Estilos para las etiquetas del formulario */
+#orden-form label {
+    display: block; /* Muestra las etiquetas como bloques */
+    margin-bottom: 8px; /* Margen inferior de las etiquetas */
+    font-weight: 600; /* Peso de fuente para las etiquetas */
+    color: #333; /* Color del texto de las etiquetas */
+    font-size: 1.1em; /* Tamaño de fuente de las etiquetas */
+}
+
+/* Estilos para los campos de texto y selectores del formulario */
+#orden-form input[type="text"],
+#orden-form select {
+    width: 100%; /* Ancho al 100% para los campos de texto y selectores */
+    padding: 12px; /* Espaciado dentro de los campos de texto y selectores */
+    margin-bottom: 20px; /* Margen inferior de los campos de texto y selectores */
+    border: 2px solid #e0e0e0; /* Borde de los campos de texto y selectores */
+    border-radius: 6px; /* Bordes redondeados para los campos de texto y selectores */
+    font-size: 1em; /* Tamaño de fuente de los campos de texto y selectores */
+    transition: border-color 0.3s ease; /* Transición para el color del borde */
+}
+
+/* Estilos para el enfoque de los campos de texto y selectores */
+#orden-form input[type="text"]:focus,
+#orden-form select:focus {
+    border-color: orange; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el contorno al enfocar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Sombra al enfocar */
+}
+
+/* Estilos para el botón de envío del formulario */
+#orden-form button[type="submit"] {
+    width: 100%; /* Ancho al 100% para el botón */
+    padding: 14px; /* Espaciado dentro del botón */
+    background-color: #ff7d33; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde para el botón */
+    border-radius: 6px; /* Bordes redondeados para el botón */
+    font-size: 1.1em; /* Tamaño de fuente del botón */
+    font-weight: 600; /* Peso de fuente del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: all 0.3s ease; /* Transiciones para efectos de hover */
+}
+
+/* Estilos para el hover del botón de envío */
+#orden-form button[type="submit"]:hover {
+    background-color: #ff7d33; /* Color de fondo al pasar el mouse */
+    transform: translateY(-2px); /* Desplaza el botón hacia arriba al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el mouse */
+}
+
+/* Estilos para el estado activo del botón de envío */
+#orden-form button[type="submit"]:active {
+    transform: translateY(0); /* Restablece la posición al hacer clic */
+}
+
+/* Estilos para el selector del formulario */
+#orden-form select {
+    appearance: none; /* Elimina el estilo por defecto del selector */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); /* Icono para el selector */
+    background-repeat: no-repeat; /* No repite el icono */
+    background-position: right 1rem center; /* Posiciona el icono a la derecha */
+    background-size: 1em; /* Tamaño del icono */
+    padding-right: 2.5em; /* Espaciado a la derecha para el icono */
+}
+
+/* Estilos para las opciones del selector según su valor */
+#orden-form select option[value="alta"] {
+    color: #dc3545; /* Color para la opción "alta" */
+    font-weight: bold; /* Peso de fuente para la opción "alta" */
+}
+
+#orden-form select option[value="media"] {
+    color: #ffc107; /* Color para la opción "media" */
+    font-weight: bold; /* Peso de fuente para la opción "media" */
+}
+
+#orden-form select option[value="baja"] {
+    color: #28a745; /* Color para la opción "baja" */
+    font-weight: bold; /* Peso de fuente para la opción "baja" */
+}
+
+/* Estilos para el contenedor de collage (modificado) */
+.collage-container {
+    display: grid; /* Utiliza grid para el diseño */
+    grid-template-columns: repeat(2, 1fr); /* Define 2 columnas */
+    gap: 1rem; /* Espacio entre los elementos del grid */
+    padding: 20px; /* Espaciado dentro del contenedor */
+    margin-top: -6.5px; /* Margen superior del contenedor */
+    margin-left: 230px; /* Margen izquierdo del contenedor */
+    height: calc(105vh - 100px); /* Altura del contenedor */
+}
+
+/* Estilos para los elementos del collage (modificado) */
+.collage-item {
+    height: 100%; /* Altura del elemento del collage al 100% */
+}
+
+/* Estilos para el contenido de la tarjeta (modificado) */
+.card-content {
+    height: 100%; /* Altura del contenido de la tarjeta al 100% */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+/* Estilos para el botón de crear orden */
+#crear-orden {
+    grid-column: span 6; /* Ocupa 6 columnas en el grid */
+    grid-row: 1 / span 3; /* Ocupa 3 filas en el grid */
+    height: 100%; /* Altura al 100% */
+}
+
+/* Estilos para el botón de comprar repuestos */
+#comprar-repuestos {
+    grid-column: 7 / span 6; /* Ocupa 6 columnas en el grid */
+    grid-row: 1; /* Ocupa la primera fila en el grid */
+    height: 100%; /* Altura al 100% */
+}
+
+/* Estilos para el botón de reportes de mantenimiento */
+#reportes-mantenimiento {
+    grid-column: 7 / span 6; /* Ocupa 6 columnas en el grid */
+    grid-row: 2; /* Ocupa la segunda fila en el grid */
+    height: 100%; /* Altura al 100% */
+    margin: 0; /* Sin margen */
+}
+
+/* Estilos para el botón de historial de mantenimiento */
+#historial-mantenimiento {
+    grid-column: 7 / span 6; /* Ocupa 6 columnas en el grid */
+    grid-row: 3; /* Ocupa la tercera fila en el grid */
+    height: 100%; /* Altura al 100% */
+    margin: 0; /* Sin margen */
+}
+
+/* Estilos para el contenedor de estadísticas (modificado) */
+.stats-container {
+    display: grid; /* Utiliza grid para el diseño */
+    grid-template-columns: repeat(2, 1fr); /* Define 2 columnas */
+    gap: 10px; /* Espacio entre los elementos de estadísticas */
+    margin-bottom: 15px; /* Margen inferior del contenedor de estadísticas */
+}
+
+/* Estilos para las tarjetas de estadísticas (modificado) */
+.stat-card {
+    padding: 10px; /* Espaciado dentro de las tarjetas de estadísticas */
+}
+
+/* Estilos para la línea de tiempo (modificado) */
+.timeline {
+    max-height: 200px; /* Altura máxima de la línea de tiempo */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    margin: 10px 0; /* Margen vertical de la línea de tiempo */
+    padding-right: 10px; /* Espaciado a la derecha de la línea de tiempo */
+}
+
+/* Estilos para el scrollbar de comprar repuestos */
+#comprar-repuestos::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+}
+
+#comprar-repuestos::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo del track del scrollbar */
+    border-radius: 4px; /* Bordes redondeados para el track del scrollbar */
+}
+
+#comprar-repuestos::-webkit-scrollbar-thumb {
+    background: #888; /* Color del thumb del scrollbar */
+    border-radius: 4px; /* Bordes redondeados para el thumb del scrollbar */
+}
+
+#comprar-repuestos::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color del thumb al pasar el mouse */
+}
+
+/* Estilos para el botón de ver todo */
+.ver-todo {
+    display: flex; /* Utiliza flexbox para el botón */
+    align-items: center; /* Centra verticalmente los elementos del botón */
+    justify-content: center; /* Centra horizontalmente los elementos del botón */
+    width: 100%; /* Ancho al 100% para el botón */
+    margin-top: 20px; /* Margen superior del botón */
+    padding: 12px 20px; /* Espaciado dentro del botón */
+    background: #3498db; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde para el botón */
+    border-radius: 8px; /* Bordes redondeados para el botón */
+    font-size: 1rem; /* Tamaño de fuente del botón */
+    font-weight: 500; /* Peso de fuente del botón */
+    text-decoration: none; /* Elimina el subrayado del texto */
+    transition: all 0.3s ease; /* Transiciones para efectos de hover */
+    gap: 10px; /* Espacio entre los elementos del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+/* Estilos para el hover del botón de ver todo */
+.ver-todo:hover {
+    background: #2980b9; /* Color de fondo al pasar el mouse */
+    transform: translateY(-2px); /* Desplaza el botón hacia arriba al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aumenta la sombra al pasar el mouse */
+}
+
+/* Estilos para el icono en el botón de ver todo */
+.ver-todo i {
+    font-size: 1.1em; /* Tamaño del icono en el botón */
+}
+
+/* Estilos para el estado activo del botón de ver todo */
+.ver-todo:active {
+    transform: translateY(0); /* Restablece la posición al hacer clic */
+}
+
+/* Estilos para el contenedor de reporte */
+.reporte-container {
+    margin-left: 240px; /* Margen izquierdo del contenedor de reporte */
+    padding: 20px; /* Espaciado dentro del contenedor de reporte */
+    height: calc(100vh - 40px); /* Altura del contenedor de reporte */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+/* Estilos para la tabla de reportes */
+.reportes-tabla {
+    background: white; /* Color de fondo de la tabla de reportes */
+    border-radius: 15px; /* Bordes redondeados para la tabla de reportes */
+    padding: 20px; /* Espaciado dentro de la tabla de reportes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra de la tabla de reportes */
+}
+
+/* Estilos para el encabezado de la tabla */
+.tabla-header {
+    display: flex; /* Utiliza flexbox para el encabezado */
+    justify-content: space-between; /* Espacio entre los elementos del encabezado */
+    align-items: center; /* Centra verticalmente los elementos del encabezado */
+    margin-bottom: 25px; /* Margen inferior del encabezado */
+    padding: 0 10px; /* Espaciado horizontal del encabezado */
+}
+
+/* Estilos para el título del encabezado de la tabla */
+.tabla-header h2 {
+    font-size: 1.8em; /* Tamaño de fuente del título */
+    color: #2c3e50; /* Color del texto del título */
+    display: flex; /* Utiliza flexbox para el título */
+    align-items: center; /* Centra verticalmente los elementos del título */
+    gap: 12px; /* Espacio entre los elementos del título */
+}
+
+/* Estilos para el icono en el encabezado de la tabla */
+.tabla-header h2 i {
+    color: #3498db; /* Color del icono en el encabezado */
+}
+
+/* Estilos para los filtros */
+.filtros {
+    display: flex; /* Utiliza flexbox para los filtros */
+    gap: 15px; /* Espacio entre los filtros */
+}
+
+/* Estilos para los selectores y entradas de los filtros */
+.filtros select, .filtros input {
+    padding: 10px 15px; /* Espaciado dentro de los filtros */
+    border: 2px solid #e0e0e0; /* Borde de los filtros */
+    border-radius: 8px; /* Bordes redondeados para los filtros */
+    font-size: 0.95em; /* Tamaño de fuente de los filtros */
+    transition: all 0.3s ease; /* Transiciones para efectos de hover */
+}
+
+/* Estilos para el enfoque de los filtros */
+.filtros select:focus, .filtros input:focus {
+    border-color: #3498db; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el contorno al enfocar */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Sombra al enfocar */
+}
+
+/* Estilos para el contenedor de la tabla */
+.tabla-container {
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    max-height: 400px; /* Altura máxima del contenedor de la tabla */
+    border-radius: 10px; /* Bordes redondeados para el contenedor de la tabla */
+    border: 1px solid #e0e0e0; /* Borde del contenedor de la tabla */
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%; /* Ancho de la tabla al 100% */
+    border-collapse: separate; /* Colapsa los bordes de la tabla */
+    border-spacing: 0; /* Espaciado entre las celdas de la tabla */
+}
+
+/* Estilos para las celdas de la tabla */
+th, td {
+    padding: 12px 15px; /* Espaciado dentro de las celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+/* Estilos para el hover de las filas de la tabla */
+tr:hover {
+    background-color: #f8f9fa; /* Color de fondo al pasar el mouse sobre la fila */
+}
+
+/* Estilos para la severidad */
+.severidad {
+    padding: 6px 12px; /* Espaciado dentro de la severidad */
+    border-radius: 20px; /* Bordes redondeados para la severidad */
+    font-size: 0.9em; /* Tamaño de fuente para la severidad */
+    font-weight: 500; /* Peso de fuente para la severidad */
+}
+
+/* Estilos para la severidad alta */
+.severidad.alta {
+    background-color: #ff6b6b; /* Color de fondo para severidad alta */
+    color: white; /* Color del texto para severidad alta */
+}
+
+/* Estilos para la severidad media */
+.severidad.media {
+    background-color: #ffd93d; /* Color de fondo para severidad media */
+    color: black; /* Color del texto para severidad media */
+}
+
+/* Estilos para la severidad baja */
+.severidad.baja {
+    background-color: #6c757d; /* Color de fondo para severidad baja */
+    color: white; /* Color del texto para severidad baja */
+}
+
+/* Estilos para el estado */
+.estado {
+    padding: 6px 12px; /* Espaciado dentro del estado */
+    border-radius: 20px; /* Bordes redondeados para el estado */
+    font-size: 0.9em; /* Tamaño de fuente para el estado */
+    font-weight: 500; /* Peso de fuente para el estado */
+}
+
+/* Estilos para el estado pendiente */
+.estado.pendiente {
+    background-color: #ffd93d; /* Color de fondo para estado pendiente */
+    color: black; /* Color del texto para estado pendiente */
+}
+
+/* Estilos para los botones de acción */
+.btn-accion {
+    padding: 6px 10px; /* Espaciado dentro de los botones de acción */
+    border: none; /* Sin borde para los botones de acción */
+    border-radius: 4px; /* Bordes redondeados para los botones de acción */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los botones de acción */
+    transition: background-color 0.3s; /* Transición para el color de fondo */
+    font-size: 0.9em; /* Tamaño de fuente para los botones de acción */
+}
+
+/* Estilos para el botón de acción generar */
+.btn-accion.generar {
+    background-color: #007BFF; /* Color de fondo para el botón generar */
+    color: white; /* Color del texto para el botón generar */
+}
+
+/* Estilos para el hover del botón de acción generar */
+.btn-accion.generar:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el botón de acción eliminar */
+.btn-accion.eliminar {
+    background-color: #dc3545; /* Color de fondo para el botón eliminar */
+    color: white; /* Color del texto para el botón eliminar */
+}
+
+/* Estilos para el hover del botón de acción eliminar */
+.btn-accion.eliminar:hover {
+    background-color: #c82333; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para la paginación */
+.paginacion {
+    display: flex; /* Utiliza flexbox para la paginación */
+    justify-content: center; /* Centra horizontalmente los elementos de paginación */
+    align-items: center; /* Centra verticalmente los elementos de paginación */
+    gap: 20px; /* Espacio entre los elementos de paginación */
+    margin-top: 20px; /* Margen superior de la paginación */
+    padding: 10px; /* Espaciado dentro de la paginación */
+}
+
+/* Estilos para los botones de paginación */
+.paginacion button {
+    padding: 8px 15px; /* Espaciado dentro de los botones de paginación */
+    border: none; /* Sin borde para los botones de paginación */
+    background-color: #3498db; /* Color de fondo para los botones de paginación */
+    color: white; /* Color del texto para los botones de paginación */
+    border-radius: 8px; /* Bordes redondeados para los botones de paginación */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los botones de paginación */
+    transition: all 0.3s ease; /* Transiciones para efectos de hover */
+}
+
+/* Estilos para el hover de los botones de paginación */
+.paginacion button:hover {
+    background-color: #2980b9; /* Color de fondo al pasar el mouse */
+    transform: translateY(-2px); /* Desplaza el botón hacia arriba al pasar el mouse */
+}
+
+/* Estilos para el texto de paginación */
+.paginacion span {
+    font-size: 1.1em; /* Tamaño de fuente para el texto de paginación */
+    color: #2c3e50; /* Color del texto de paginación */
+}
+
+/* Estilos para las columnas de la tabla */
+th:nth-child(1), td:nth-child(1) { 
+    width: 8%; /* Ancho de la primera columna */
+}
+
+th:nth-child(2), td:nth-child(2) { 
+    width: 10%; /* Ancho de la segunda columna */
+}
+
+th:nth-child(3), td:nth-child(3) { 
+    width: 15%; /* Ancho de la tercera columna */
+}
+
+th:nth-child(4), td:nth-child(4) { 
+    width: 12%; /* Ancho de la cuarta columna */
+}
+
+th:nth-child(5), td:nth-child(5) { 
+    width: 25%; /* Ancho de la quinta columna */
+    max-width: 300px; /* Ancho máximo de la quinta columna */
+}
+
+th:nth-child(6), td:nth-child(6) { 
+    width: 10%; /* Ancho de la sexta columna */
+}
+
+th:nth-child(7), td:nth-child(7) { 
+    width: 10%; /* Ancho de la séptima columna */
+}
+
+th:nth-child(8), td:nth-child(8) { 
+    width: 10%; /* Ancho de la octava columna */
+    text-align: center; /* Alineación del texto al centro en la octava columna */
+}
+
+/* Estilos para la celda de la quinta columna */
+td:nth-child(5) {
+    max-width: 300px; /* Ancho máximo de la celda */
+    white-space: normal; /* Permite el ajuste de línea */
+    overflow: hidden; /* Oculta el desbordamiento de contenido */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es demasiado largo */
+    word-wrap: break-word; /* Permite el ajuste de palabras largas */
+}
+
+/* Estilos para el botón de acción generar (duplicado) */
+.btn-accion.generar {
+    background-color: #007BFF; /* Color de fondo para el botón generar */
+    color: white; /* Color del texto para el botón generar */
+    padding: 8px 12px; /* Espaciado dentro del botón generar */
+    border: none; /* Sin borde para el botón generar */
+    border-radius: 5px; /* Bordes redondeados para el botón generar */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón generar */
+    transition: background-color 0.3s; /* Transición para el color de fondo */
+}
+
+/* Estilos para el hover del botón de acción generar (duplicado) */
+.btn-accion.generar:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el contenedor de compra de repuestos */
+.compra-repuestos-container {
+    margin: 20px; /* Margen del contenedor de compra de repuestos */
+    padding: 20px; /* Espaciado dentro del contenedor de compra de repuestos */
+    background: white; /* Color de fondo del contenedor de compra de repuestos */
+    border-radius: 10px; /* Bordes redondeados para el contenedor de compra de repuestos */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenedor de compra de repuestos */
+}
+
+/* Estilos para el contenedor del formulario */
+.form-container {
+    max-width: 600px; /* Ancho máximo del contenedor del formulario */
+    margin: auto; /* Centra el contenedor del formulario */
+}
+
+/* Estilos para los encabezados */
+h2 {
+    text-align: center; /* Centra el texto del encabezado */
+    margin-bottom: 20px; /* Margen inferior del encabezado */
+    color: #2c3e50; /* Color del texto del encabezado */
+}
+
+/* Estilos para las etiquetas */
+label {
+    display: block; /* Muestra las etiquetas como bloques */
+    margin-bottom: 5px; /* Margen inferior de las etiquetas */
+    font-weight: bold; /* Peso de fuente para las etiquetas */
+    color: #34495e; /* Color del texto de las etiquetas */
+}
+
+/* Estilos para los campos de entrada */
+input {
+    width: 100%; /* Ancho al 100% para los campos de entrada */
+    padding: 10px; /* Espaciado dentro de los campos de entrada */
+    margin-bottom: 15px; /* Margen inferior de los campos de entrada */
+    border: 1px solid #ddd; /* Borde de los campos de entrada */
+    border-radius: 5px; /* Bordes redondeados para los campos de entrada */
+    font-size: 1em; /* Tamaño de fuente de los campos de entrada */
+    transition: border-color 0.3s; /* Transición para el color del borde */
+}
+
+/* Estilos para el enfoque de los campos de entrada */
+input:focus {
+    border-color: #3498db; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el contorno al enfocar */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2); /* Sombra al enfocar */
+}
+
+/* Estilos para los botones */
+button {
+    width: 100%; /* Ancho al 100% para los botones */
+    padding: 12px; /* Espaciado dentro de los botones */
+    background-color: #ff7d33; /* Color de fondo de los botones */
+    color: white; /* Color del texto de los botones */
+    border: none; /* Sin borde para los botones */
+    border-radius: 5px; /* Bordes redondeados para los botones */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
+    font-size: 1.1em; /* Tamaño de fuente de los botones */
+    transition: background-color 0.3s; /* Transición para el color de fondo */
+}
+
+/* Estilos para el hover de los botones */
+button:hover {
+    background-color: #f16411; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el estado activo de los botones */
+button:active {
+    transform: translateY(1px); /* Desplaza el botón hacia abajo al hacer clic */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+    display: flex; /* Utiliza flexbox para el contenedor principal */
+    height: 100vh; /* Altura del contenedor principal al 100% */
+}
+
+/* Estilos para la barra lateral */
+.sidebar {
+    width: 240px; /* Ancho de la barra lateral */
+    background-color: #2c3e50; /* Color de fondo de la barra lateral */
+    color: white; /* Color del texto de la barra lateral */
+    padding: 20px; /* Espaciado dentro de la barra lateral */
+    height: 100vh; /* Altura de la barra lateral al 100% */
+    position: fixed; /* Fija la barra lateral en la pantalla */
+}
+
+/* Estilos para los encabezados de la barra lateral */
+.sidebar h2 {
+    margin: 0 0 20px; /* Margen inferior del encabezado de la barra lateral */
+    font-size: 1.5em; /* Tamaño de fuente del encabezado de la barra lateral */
+}
+
+/* Estilos para las listas de la barra lateral */
+.sidebar ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding de la lista */
+}
+
+/* Estilos para los elementos de la lista de la barra lateral */
+.sidebar ul li {
+    margin: 15px 0; /* Margen entre los elementos de la lista */
+}
+
+/* Estilos para los enlaces de la lista de la barra lateral */
+.sidebar ul li a {
+    color: white; /* Color del texto de los enlaces */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-size: 1.1em; /* Tamaño de fuente de los enlaces */
+    display: flex; /* Utiliza flexbox para los enlaces */
+    align-items: center; /* Centra verticalmente los elementos dentro del enlace */
+}
+
+/* Estilos para los iconos en los enlaces de la barra lateral */
+.sidebar ul li a i {
+    margin-right: 10px; /* Margen a la derecha del icono */
+}
+
+/* Estilos para el hover de los enlaces de la barra lateral */
+.sidebar ul li a:hover {
+    color: #3498db; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos para el enlace activo de la barra lateral */
+.sidebar ul li a.active {
+    color: #3498db; /* Color del texto para el enlace activo */
+}
+
+/* Estilos para el contenedor de compra de repuestos (modificado) */
+.compra-repuestos-container {
+    margin-left: 260px; /* Margen izquierdo del contenedor de compra de repuestos */
+    padding: 20px; /* Espaciado dentro del contenedor de compra de repuestos */
+    background: white; /* Color de fondo del contenedor de compra de repuestos */
+    border-radius: 10px; /* Bordes redondeados para el contenedor de compra de repuestos */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenedor de compra de repuestos */
+}
+
+/* Estilos para el selector en el contenedor del formulario */
+.form-container select {
+    padding: 10px; /* Espaciado dentro del selector */
+    border: 1px solid #ccc; /* Borde del selector */
+    border-radius: 4px; /* Bordes redondeados para el selector */
+    font-size: 1rem; /* Tamaño de fuente del selector */
+    margin-bottom: 15px; /* Margen inferior del selector */
+    transition: border-color 0.3s; /* Transición para el color del borde */
+}
+
+/* Estilos para el enfoque del selector en el contenedor del formulario */
+.form-container select:focus {
+    border-color: #007bff; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el contorno al enfocar */
+}
+
+/* Estilos para las opciones del selector */
+.form-container option {
+    padding: 10px; /* Espaciado dentro de las opciones */
+}
+
+/* Contenedor del modal */
+.modal-container {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+/* Botón para cerrar el modal */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+}
